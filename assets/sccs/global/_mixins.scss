@@ -1,0 +1,20 @@
+@mixin flex($align:unset, $justify: unset){
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+@mixin media ($width){
+    @media screen and (max-width: #{$width}px) {
+        @content;
+    }
+}
+@mixin adaptive-value ($property, $startSize, $MinSize){
+    $addSize: $startSize - $MinSize;
+    #{$property}: $startSize + px;
+    @media (max-width:#{1312 + px}) {
+        #{$property}: calc(
+            #{$MinSize + px} + #{$addSize} *
+                ((100vw - 320px) / #{1312 - 320})
+        )
+    }
+}
